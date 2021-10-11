@@ -1,0 +1,114 @@
+
+설정 화면
+Linux - Debian 64bit - VDI(VirtualBox Disk Image) - 동적 할당 - 8GB(디스크 용량)
+
+encrypted LVM(암호화 LVM)
+
+
+과제 요약
+저장소 루트 안에 있는 signature.txt파일만 제출해야한다.
+* GUI service는 사용하면 안된다.
+* 과제에서 허용하는것 이외에 설치하면 안된다.
+* 최신 버전의 데비안 혹은 CentOS를 설치하길 권장한다.
+* 데비안의 경우 APPArmor가 반드시 실행될때 시작되어야한다.
+* LVM을 사용하여 암호화된 파티션을 2개 이상 생성해야한다.
+
+
+
+
+
+SSH
+
+SSH서비스는 포트 4242에서만 실행됟어야한다. Root로 연결해서 사용되면 안된다.(보안상의 이유)
+
+
+UTW
+가상머신을 시작 할 때 방화벽이 활성화되어있어야한다.
+방화벽으로 운영체제를 구성해야하므로 포트 4242만을 열어라.
+
+* 가상 머신의 호스트 이름은 42로 끝나는 로그인이어야 한다. Ex) wil42
+* 암호 정책을 구현해야한다.
+* 규칙에 따라 sudo를 설치하고 구성해야한다.
+* 루트 사용자 외에 사용자 이름으로 로그인한 사용자가 있어야한다.
+* 이 사용자는 (루트말고) User42, sudo그룹에 속해야한다.
+
+
+방어하는 동안 새 사용자를 만들고 할당해야한다.
+
+
+
+
+암호정책
+* 비밀번호는 30일마다 만료해야한다.
+* 암호 만료가 되기 7일전에 사용자는 경고를 받아야한다.
+* The minimum number of days allowed before the modification of a password will be set to 2.
+* 비밀번호는 10자 이상이여야 하며 문자와 숫자, 대문자를 포함해야한다. 또한 동일 내용이 연속 3개 이상 포함되면 안된다.
+* 비밀번호는 유저의 네임을 포함하면 안된다.
+* 이전 암호의 일부가 아닌 최소 7자
+* 루트 암호도 이 정책을 준수해야한다.
+
+
+
+
+
+
+
+SUDO
+* sudo그룹에 대해 다음을 준수해야한다.
+* sudo를 이용한 인증은 비밀번호가 틀릴경우 3번의 시도로 제한해야한다.
+* 
+
+
+
+
+호스트네임 체크 : hostnamectl
+호스트네임 변경 : sudo hostnamectl set-hostname <바꿀이름>
+
+Openssh 설치여부 확인 : apt search openssh-server
+Ssh 설치 : apt install openssh-serve
+실행 여부 및 포트확인 : systemctl status ssh
+
+
+ufw설치 : sudo apt install ufw
+상태 확인 : Sudo ufw status vervos
+기본 incoming rule을 deny로 설정 : Sudo uff default deny
+4242 포트 열기 : sudo uff allow 4242
+rule확인 (규칙번호) : sudo ufw status numbered
+rule삭제 : sudo uff delete <규칙번호>
+
+
+APPAromor실행 여부 : aa-enabled
+Appaormor모드 확인 : sudo aa-status
+제한된 실행 파일 보기 :  ps auxZ | grep -v '^unconfined'
+
+
+
+ifconfig(net-tool) 설치 :  sudo apt-get install net-tools
+
+
+구성 파일을 설정한 후 변경해야 합니다.
+가상 머신에 있는 계정의 모든 암호,
+루트 계정을 포함합니다.
+
+
+
+USER
+Joyous
+Debian4242!
+
+LVM
+Lvmdebian4242!
+
+
+
+
+
+
+10.0.2.15
+
+
+
+
+
+
+
