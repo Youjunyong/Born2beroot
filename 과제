@@ -64,22 +64,11 @@ SUDO
 호스트네임 체크 : hostnamectl
 호스트네임 변경 : sudo hostnamectl set-hostname <바꿀이름>
 
-Openssh 설치여부 확인 : apt search openssh-server
-Ssh 설치 : apt install openssh-serve
-실행 여부 및 포트확인 : systemctl status ssh
 
 
-ufw설치 : sudo apt install ufw
-상태 확인 : Sudo ufw status vervos
-기본 incoming rule을 deny로 설정 : Sudo uff default deny
-4242 포트 열기 : sudo uff allow 4242
-rule확인 (규칙번호) : sudo ufw status numbered
-rule삭제 : sudo uff delete <규칙번호>
 
 
-APPAromor실행 여부 : aa-enabled
-Appaormor모드 확인 : sudo aa-status
-제한된 실행 파일 보기 :  ps auxZ | grep -v '^unconfined'
+
 
 
 
